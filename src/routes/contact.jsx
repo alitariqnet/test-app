@@ -1,14 +1,13 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+import { getContact } from "../contacts";
+
+export async function loader({ params }) {
+  const contact = await getContact(params.contactId);
+  return { contact };
+}
 
 export default function Contact() {
-    const contact = {
-      first: "Ali",
-      last: "Tariq",
-      avatar: "https://robohash.org/you.png?size=200x200",
-      twitter: "http://www.alitariq.site",
-      notes: "Some notes",
-      favorite: true,
-    };
+  const { contact } = useLoaderData();
 
     return (
         <div id="contact">
